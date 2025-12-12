@@ -1,26 +1,29 @@
 import { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Card from '../components/Card';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import SearchCard from '../components/SearchCard';
 import Sidebar from '../components/Sidebar';
 import Spinner from '../components/Spinner';
+import { clearVideos } from '../features/youtube/youtubeSlice';
 import { useAppDispatch, useAppSelector } from '../store/ConfigureStore';
-import { getHomePageVideos } from '../store/reducers/getHomePageVideos';
+import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos';
 
 
-const Home = () => {
+const Search = () => {
+
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const videos = useAppSelector((state) => state.youtubeApp.video);
+  const searchTerm = useAppSelector((state) => state.youtubeApp.searchterm);
+
   useEffect(() => {
-    dispatch(getHomePageVideos(false))
-  }, [dispatch])
+    dispatch(clearVideos())
+    if(searchTerm === "") navigate("/");
+    else dispatch(getSearchPageVideos(false))
+  }, [dispatch, navigate, searchTerm])
 
   
-
-  // useEffect(() => {
-  //   console.log(videos);  // Now shows updated values
-  // }, [videos]);
-
   return (
     <div className='max-h-screen overflow-auto'>
       <div style={{height : "7.5vh"}}>
@@ -30,19 +33,26 @@ const Home = () => {
         <Sidebar/>
           {
           videos.length ? (
+            <div className='py-8 pl-8 flex flex-col gap-5 w-full'>
             <InfiniteScroll 
              dataLength={videos.length} 
-             next={() => dispatch(getHomePageVideos(true))}
+             next={() => dispatch(getSearchPageVideos(true))}
              hasMore={videos.length < 500}
              loader={<Spinner/>}
              height={650}
              >
-              <div className="grid gap-y-14 gap-x-8 grid-cols-4 p-8">
+             
                 {videos.map((item) => {
-                  return <Card data={item} key={item.videoId}/>
+                  return (
+                     <div className="my-5 mt-5">
+                  <SearchCard data={item} key={item.videoId}/>
+                    </div>
+                )
+
                 })}
-              </div>
+
             </InfiniteScroll>
+            </div>
           ):(
           <Spinner/>
           )
@@ -53,5 +63,5 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Search
 

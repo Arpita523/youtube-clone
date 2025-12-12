@@ -22,7 +22,7 @@ const Card = ({data}) => {
                         <a href="#" className="hover:text-white">{data.channelInfo.name}</a>
                     </div>
                     <div>
-                        <span>
+                        <span className="after:contents-['•'] after:mx-1">
                             {data.videoViews} views
                         </span>
                         <span>
