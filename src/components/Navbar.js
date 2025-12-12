@@ -4,10 +4,26 @@ import { BsBell } from "react-icons/bs";
 import { FaMicrophone } from "react-icons/fa";
 import { RiVideoAddLine } from "react-icons/ri";
 import { TiThMenu } from "react-icons/ti";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { changeSearchTerm, clearVideos } from "../features/youtube/youtubeSlice";
+import { useAppDispatch, useAppSelector } from "../store/ConfigureStore";
+import { getSearchPageVideos } from "../store/reducers/getSearchPageVideos";
 
 
 const Navbar = () => {
+
+    const location = useLocation()
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const searchTerm = useAppSelector((state) => state.youtubeApp.searchterm);
+
+    const handleSearch = () => {
+        if(location.pathname !== `/search`) navigate("/search");
+        else {
+             dispatch(clearVideos());
+             dispatch(getSearchPageVideos(false))
+        }
+    }
   return (
     <div className="flex justify-between px-14 h-14 items-center bg-[#212121] opacity-95 sticky">
       <div className=" flex gap-8 items-center text-2xl">
@@ -20,10 +36,13 @@ const Navbar = () => {
         </div>
         </div>
         <div className="flex items-center justify-center gap-5">
-            <form>
+            <form onSubmit = {(e) => {
+                e.preventDefault();
+                handleSearch();
+            }} >
                 <div className="flex bg-zinc-900 items-center h-10 px-1 pr-5 rounded-full">
                     <div className="flex items-center gap-5 pr-5 ">
-                        <input type="text" placeholder="search" className="w-96 bg-zinc-900 font-serif focus:outline-none border-none pl-7 rounded-r-3xl "/>
+                        <input type="text" placeholder="search" className="w-96 bg-zinc-900 font-serif focus:outline-none border-none pl-7 rounded-r-3xl" value = {searchTerm} onChange = {e => dispatch(changeSearchTerm(e.target.value))} />
                     </div>
                      <button className=" h-10 w-16 flex items-center justify-center bg-zinc-800 rounded-r-3xl">
                             <AiOutlineSearch className="text-2xl"/>
