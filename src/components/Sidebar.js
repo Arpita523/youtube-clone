@@ -4,6 +4,7 @@ import { IoMdMusicalNote } from "react-icons/io";
 import { MdHistory, MdOutlineMovie, MdOutlinePlaylistPlay, MdOutlineVideoLibrary, MdOutlineWatchLater, MdSubscriptions } from "react-icons/md";
 import { RiShoppingBag4Fill } from "react-icons/ri";
 import { SiYoutubeshorts } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 
 
@@ -58,10 +59,10 @@ const Sidebar = () => {
                 mainLinks.map(({icon, name}) => {
                     return (
                         <li key={name} className={`pl-6 py-3 hover:bg-zinc-600 rounded-full ${name === 'Home' ? 'bg-zinc-600' : ''}'`}>
-                            <a href='#' className="flex items-center gap-5">
+                            <Link href='#' className="flex items-center gap-5">
                                 {icon}
                                 <span className="text-sm tracking-wider">{name}</span>
-                            </a>
+                            </Link>
                         </li>
                     )
                 })
@@ -73,10 +74,10 @@ const Sidebar = () => {
                 secondaryLinks.map(({icon, name}) => {
                     return (
                         <li key={name} className={`pl-6 py-3 hover:bg-zinc-600 rounded-full ${name === 'Home' ? 'bg-zinc-600' : ''}'`}>
-                            <a href='#' className="flex items-center gap-5">
+                            <Link href='#' className="flex items-center gap-5">
                                 {icon}
                                 <span className="text-sm tracking-wider">{name}</span>
-                            </a>
+                            </Link>
                         </li>
                     )
                 })
@@ -87,10 +88,10 @@ const Sidebar = () => {
                 thirdLinks.map(({icon, name}) => {
                     return (
                         <li key={name} className={`pl-6 py-3 hover:bg-zinc-600 rounded-full ${name === 'Home' ? 'bg-zinc-600' : ''}'`}>
-                            <a href='#' className="flex items-center gap-5">
+                            <Link href='#' className="flex items-center gap-5">
                                 {icon}
                                 <span className="text-sm tracking-wider">{name}</span>
-                            </a>
+                            </Link>
                         </li>
                     )
                 })
