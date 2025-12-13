@@ -10,7 +10,7 @@ const Watch = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const currentPlaying = useAppSelector((state) => state.youtubeApp.currentPlaying);
-    const recommendedVideo = useAppSelector((state) => state.youtubeApp.recommendedVideo);
+    // const recommendedVideo = useAppSelector((state) => state.youtubeApp.recommendedVideo);
 
     console.log(currentPlaying)
     useEffect(() => {
