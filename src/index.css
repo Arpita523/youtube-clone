@@ -4,12 +4,18 @@ body{
   margin: 0;
   background-color: #181818;
   color: #fff;
-  font-family: "Roboto", sans-serif;
-
-
-  
+  font-family: "Roboto", sans-serif;  
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar{
+  background-color: transparent;
+  width: 0.5rem;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #c7c7c7;
+  border-radius: 1rem,;
+}

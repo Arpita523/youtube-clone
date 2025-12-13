@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import convertRawToString from "./convertRawToString";
 import parseVideoDuration from "./parseVideoDuration";
@@ -5,7 +6,7 @@ import timeSince from "./timeSince";
 
 const API_KEY = process.env.REACT_APP_YOUTUBE_DATA_API_KEY;
 
-const parseData = async (items) => {
+const parseRecommendedData = async (items) => {
   try {
     const videoIds = [];
     const channelIds = [];
@@ -66,6 +67,6 @@ const parseData = async (items) => {
   }
 };
 
-export default parseData;
+export default parseRecommendedData;
 
 
